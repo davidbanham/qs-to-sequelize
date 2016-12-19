@@ -77,6 +77,12 @@ describe('query', () => {
     expect(result.where.updated_at).to.eql({ $lt: ts });
   });
 
+  it('must handle updated_before AND updated_since', () => {
+    const ts = '2016-12-07T00:28:40.480Z';
+    const result = queryLib({ updated_since: ts, updated_before: ts });
+    expect(result.where.updated_at).to.eql({ $lt: ts, $gt: ts });
+  });
+
   it('must transmute filter[user_id]', () => {
     const result = queryLib({ filter: {user_id: 'fred' }});
     expect(result.where.user_id).to.eql('fred');
