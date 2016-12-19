@@ -77,8 +77,14 @@ describe('query', () => {
     expect(result.where.updated_at).to.eql({ $lt: ts });
   });
 
-  it('must transmute user_id', () => {
-    const result = queryLib({ 'filter[user_id]': 'fred' });
+  it('must transmute filter[user_id]', () => {
+    const result = queryLib({ filter: {user_id: 'fred' }});
     expect(result.where.user_id).to.eql('fred');
+  });
+
+  it('must transmute multiple filter params', () => {
+    const result = queryLib({ filter: {user_id: 'fred', foo: 'bar' }});
+    expect(result.where.user_id).to.eql('fred');
+    expect(result.where.foo).to.eql('bar');
   });
 });

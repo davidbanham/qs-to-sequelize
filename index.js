@@ -2,6 +2,7 @@ const httperrors = require('httperrors');
 
 module.exports = (qs) => {
   const query = {};
+
   if (qs.per_page) query.limit = qs.per_page;
   if (qs.page) {
     if (!qs.per_page) throw httperrors.BadRequest('Cannot calculate page without per_page');
@@ -19,13 +20,7 @@ module.exports = (qs) => {
     }
   }
 
-  query.where = Object.keys(qs).reduce((f, k) => {
-    if (k.slice(0, 7) === 'filter[') {
-      f[k.slice(7, -1)] = qs[k];
-      return f;
-    }
-    return f;
-  }, {});
+  query.where = Object.assign({}, qs.filter);
 
   if (qs.created_since) {
     query.where.created_at = { $gt: qs.created_since };
