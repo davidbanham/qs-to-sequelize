@@ -2,6 +2,21 @@
 
 This library takes a querystring and turns it into something you can give to Sequelize.
 
+## Example
+
+```javascript
+const queryLib = require('../lib/query');
+const User = require('../models/user');
+
+const router = new Router();
+
+router
+  .get('', async (req, res) => {
+    const query = queryLib(req.query);
+    res.json(await User.findAll(query));
+  })
+```
+
 ## API
 
 The querystring params you can pass are:
