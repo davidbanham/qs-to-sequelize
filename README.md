@@ -87,3 +87,7 @@ https://www.npmjs.com/package/express-yields
 or
 
 Wrap calls in a `try`.
+
+## Dedication
+
+Development of this library was funded by [Ordermentum](http://www.ordermentum.com/)
