@@ -57,3 +57,18 @@ Only return documents created since this time
 Only return documents created before this time
 
 `created_before=2016-12-19T05%3A34%3A15.518Z` -> `{ where: { created_at: { $lt: '2016-12-19T05:34:15.518Z' } } }`
+
+## NB
+If the library doesn't like something it's passed, it will `throw` an error back at you.
+
+Use something that handles errors for you like:
+
+https://www.npmjs.com/package/express-async-errors
+
+or
+
+https://www.npmjs.com/package/express-yields
+
+or
+
+Wrap calls in a `try`.
