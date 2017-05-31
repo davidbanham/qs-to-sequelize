@@ -1,9 +1,12 @@
 const httperrors = require('httperrors');
 
-module.exports = (qs) => {
+module.exports = (opts = {}) => (qs) => {
   const query = {};
 
   if (qs.per_page) query.limit = qs.per_page;
+  if (!query.limit) query.limit = opts.default_per_page;
+  if (query.limit > opts.max_per_page) query.limit = opts.max_per_page;
+
   if (qs.page) {
     if (!qs.per_page) throw httperrors.BadRequest('Cannot calculate page without per_page');
 

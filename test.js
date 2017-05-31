@@ -1,4 +1,4 @@
-const queryLib = require('./index');
+const queryLib = require('./index')();
 const expect = require('must');
 
 describe('query', () => {
@@ -26,6 +26,18 @@ describe('query', () => {
     }
 
     if (!thrown) throw new Error('did not throw');
+  });
+
+  it('must set a max per_page if asked', () => {
+    const innerLib = require('./index')({max_per_page: 10});
+    const result = innerLib({ per_page: 20 });
+    expect(result.limit).to.equal(10);
+  });
+
+  it('must set a default per_page if asked', () => {
+    const innerLib = require('./index')({default_per_page: 20});
+    const result = innerLib({});
+    expect(result.limit).to.equal(20);
   });
 
   it('must transmute sort', () => {

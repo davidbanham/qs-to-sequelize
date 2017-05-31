@@ -5,7 +5,7 @@ This library takes a querystring and turns it into something you can give to Seq
 ## Example
 
 ```javascript
-const queryLib = require('../lib/query');
+const queryLib = require('../lib/query')();
 const User = require('../models/user');
 
 const router = new Router();
@@ -16,6 +16,25 @@ router
     res.json(await User.findAll(query));
   })
 ```
+
+### Opts
+
+You can pass the following options:
+
+```
+{
+  max_per_page: 20,
+  default_per_page: 10,
+}
+```
+
+Like so:
+
+```
+const queryLib = require('../lib/query')({max_per_page: 20});
+```
+
+Opts are new as of version 2.x.x
 
 ## API
 
