@@ -8,9 +8,9 @@ module.exports = (opts = {}) => (qs) => {
   if (query.limit > opts.max_per_page) query.limit = opts.max_per_page;
 
   if (qs.page) {
-    if (!qs.per_page) throw httperrors.BadRequest('Cannot calculate page without per_page');
+    if (!query.limit) throw httperrors.BadRequest('Cannot calculate page without per_page');
 
-    query.offset = qs.per_page * (qs.page - 1);
+    query.offset = query.limit * (qs.page - 1);
   }
 
   if (qs.sort) {

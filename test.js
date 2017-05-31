@@ -40,6 +40,18 @@ describe('query', () => {
     expect(result.limit).to.equal(20);
   });
 
+  it('must use the default_per_page for offset calculation if a specific per_page is not set', () => {
+    const innerLib = require('./index')({default_per_page: 20});
+    const result = innerLib({page: 2});
+    expect(result.offset).to.equal(20);
+  });
+
+  it('must not let the default_per_page override the specific per_page in offset calculation', () => {
+    const innerLib = require('./index')({default_per_page: 20});
+    const result = innerLib({page: 2, per_page: 10});
+    expect(result.offset).to.equal(10);
+  });
+
   it('must transmute sort', () => {
     const result = queryLib({ sort: 'created_at' });
     expect(Array.isArray(result.order));
