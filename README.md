@@ -2,6 +2,18 @@
 
 This library takes a querystring and turns it into something you can give to Sequelize.
 
+## Installation
+
+```
+yarn add qs-to-sequelize
+```
+
+or
+
+```
+npm install -g qs-to-sequelize
+```
+
 ## Example
 
 ```javascript
